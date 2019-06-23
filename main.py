@@ -17,17 +17,6 @@ from sqlalchemy import create_engine
 #from shapely.wkt import dumps, loads
 warnings.filterwarnings('ignore')
 
-from sklearn import preprocessing
-from sklearn.model_selection import train_test_split, StratifiedKFold
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, mean_absolute_error, mean_squared_error, r2_score
-
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
-from sklearn.linear_model import LogisticRegression
-from sklearn.cluster import KMeans
-import xgboost as xgb
-import keras
-
 from steps.segments_times_levels import segments
 from steps.segments_times_levels import times
 from steps.segments_times_levels import segments_times_levels
