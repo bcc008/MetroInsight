@@ -1,0 +1,66 @@
+### runtime options
+skip_data_selection: False
+skip_data_processing: False
+# train all data points or train clusters separately
+skip_clustering: False
+
+
+### modeling
+# train val test split
+train_test_ratio_clf: 0.2
+train_test_ratio_clst: 0.2
+cross_validation_folds: 5
+# verbosity and logging (set false to skip printing and logging)
+verbose: False
+logging: False
+
+
+### general parameters
+version: 0
+seed: 1337
+save_dir: './data/modeling_files/'
+conn_str_file: './db_conn_str.txt'
+# write data (starting from notebook 2)
+sql_chunksize: 100
+
+
+### sampling
+# segments
+segment_queries_to_run: ['bounding_box','cum_seg_pct']
+bounding_box: 
+    input_nw_corner: '32.77 N 117.81 W'
+    input_se_corner: '32.71 N 117.11 W'
+# times
+time_queries_to_run: ['cum_ts_pct']
+time_resolution: 30
+time_queries:
+    day_of_week:
+        input_dow: 5
+    exclude_dates: ['1999-12-31']
+    sample:
+        time_sample: 10
+    time_window:
+        time_window_include: 
+            - ['06:00:00', '09:00:00']
+            - ['15:00:00', '19:00:00']
+            - ['21:00:00', '23:00:00']
+    cum_ts_pct: 100
+# ratio of negative to positive segments (positive number or 'all')
+negative_positive_ratio: 4
+
+
+### feature engineering
+# streets
+highway_features_two_way: True
+streets: ['I-5 N','I-8 E','I-15 N','I-805 N','SR-15 N','SR-52 E','SR-54 E',
+           'SR-56 E','SR-67 N','SR-75 N','SR-94 E','SR-125 N','SR-163 N','SR-905 E',
+           'I-5 S','I-8 W','I-15 S','I-805 S','SR-15 S','SR-52 W','SR-54 W',
+           'SR-56 W','SR-67 S','SR-75 S','SR-94 W','SR-125 S','SR-163 S','SR-905 W']
+# segment average level ('time series' or 'all')
+level_max_average: 'all'
+# events
+event_attendance_threshold: 25000
+event_start_window_before: 2
+event_start_window_after:  0.5
+event_end_window_before: 0.5
+event_end_window_after: 1

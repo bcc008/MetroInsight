@@ -1,0 +1,1 @@
+host=postgres dbname=waze_schema user=postgresadmin password=admin123

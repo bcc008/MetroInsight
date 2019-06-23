@@ -1,0 +1,1 @@
+postgresql://postgresadmin:admin123@postgres/waze_schema

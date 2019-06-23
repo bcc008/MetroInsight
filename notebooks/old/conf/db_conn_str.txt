@@ -1,0 +1,1 @@
+host=localhost dbname=Waze user=postgres password=admin

@@ -1,0 +1,91 @@
+### runtime options
+skip_data_selection: True
+skip_sampling: True
+skip_data_processing: True
+skip_clustering: True
+# write data to pickle file or sql file (used for checkpoints)
+write_data_sql: False
+write_data_pkl: True
+write_path: '/cephfs/MetroInsight/metroinsight/experiments/00/'
+load_data_sql_or_pkl: 'pkl'
+
+
+### modeling
+# train val test split
+train_test_ratio_clf: 0.2
+train_test_ratio_clst: 0.2
+cross_validation_folds: 5
+# train on all data or clustered data (experts)
+train_experts: False
+# metric to pick parameters for final test
+binary_validation_metric: 'f1score'
+multi_validation_metric: 'r2'
+
+
+
+### general parameters
+version: 0
+seed: 1337
+save_dir: '/cephfs/MetroInsight/metroinsight/modeling_files/'
+data_dir: '/cephfs/MetroInsight/metroinsight/raw_data/'
+conn_str_file: './db_conn_str.txt'
+logging: True
+debug: True
+# sql chunksize
+sql_chunksize: 100
+
+
+### sampling
+# segments
+segment_queries_to_run: ['bounding_box','cum_seg_pct']
+segment_queries:
+    bounding_box: 
+        input_nw_corner: '32.789 N, 117.271 W'
+        input_se_corner: '32.682 N, 117.056 W'
+    ignore: 1
+    road_type: 1
+    radius:
+        input_poi: '32.7077 N, 117.1569 W'
+        input_radius: 10
+    sample:
+        segments_sample: 10
+    street:
+        input_street: '10th Ave'
+    cum_seg_pct: 100
+# times
+time_queries_to_run: ['cum_ts_pct']
+time_resolution: 30
+time_queries:
+    day_of_week:
+        input_dow: 5
+    exclude_dates: ['1999-12-31']
+    sample:
+        time_sample: 10
+    time_window:
+        time_window_include: 
+            - ['06:00:00', '09:00:00']
+            - ['15:00:00', '19:00:00']
+            - ['21:00:00', '23:00:00']
+    cum_ts_pct: 100
+# ratio of negative to positive segments (positive number or 'all')
+negative_positive_ratio: 4
+
+
+### feature engineering
+# streets
+highway_features_two_way: False
+streets: ['I-5 N','I-8 E','I-15 N','I-805 N','SR-15 N','SR-52 E','SR-54 E',
+          'SR-56 E','SR-67 N','SR-75 N','SR-94 E','SR-125 N','SR-163 N','SR-905 E',
+          'I-5 S','I-8 W','I-15 S','I-805 S','SR-15 S','SR-52 W','SR-54 W',
+          'SR-56 W','SR-67 S','SR-75 S','SR-94 W','SR-125 S','SR-163 S','SR-905 W']
+
+# segment average level ('time series' or 'all')
+level_max_average: 'time series'
+# events
+event_attendance_threshold: 25000
+# distance here is measured by the inverse (1/x) so that 0 is infinitely far (no event) while a large number like 1000 is very close to the event
+event_distance_threshold: 1
+event_start_window_before: 2
+event_start_window_after:  0.5
+event_end_window_before: 0.5
+event_end_window_after: 1
